@@ -11,26 +11,9 @@ spec:
     kind: vpc
     plural: vpcs
   versions:
-  - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
-    - jsonPath: .status.conditions[?(@.type=='Synced')].status
-      name: SYNCED
-      type: string
-    - jsonPath: .metadata.annotations.crossplane\.io/external-name
-      name: ID
-      type: string
-    - jsonPath: .spec.forProvider.cidrBlock
-      name: CIDR
-      type: string
-    - jsonPath: .spec.forProvider.ipv6CidrBlock
-      name: IPV6CIDR
-      type: string
-    - jsonPath: .metadata.creationTimestamp
-      name: AGE
-      type: date
-    name: v1beta1
+  - name: v1alpha1
+    served: true
+    referenceable: true
     schema:
       openAPIV3Schema:
         description: A VPC is a managed resource that represents an AWS Virtual Private
