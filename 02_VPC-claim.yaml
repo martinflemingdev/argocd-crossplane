@@ -1,0 +1,8 @@
+apiVersion: ec2.aws.mfdev.com/v1alpha1
+kind: VPC
+metadata:
+  name: vpc-claim
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/16
+    region: us-east-1

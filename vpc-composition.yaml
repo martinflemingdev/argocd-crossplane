@@ -1,32 +1,31 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
-  name: example
+  name: comp.vpcs.ec2.aws.mfdev.com
   labels:
-    crossplane.io/xrd: xpostgresqlinstances.database.example.org
-    provider: gcp
+    crossplane.io/xrd: xrds.vpcs.ec2.aws.mfdev.com
 spec:
   writeConnectionSecretsToNamespace: crossplane-system
   compositeTypeRef:
-    apiVersion: database.example.org/v1alpha1
-    kind: XPostgreSQLInstance
+    apiVersion: xrds.vpcs.ec2.aws.mfdev.com/v1alpha1
+    kind: XVPC
   resources:
-  - name: cloudsqlinstance
+  - name: vpc
     base:
-      apiVersion: database.gcp.crossplane.io/v1beta1
-      kind: CloudSQLInstance
+      apiVersion: ec2.aws.crossplane.io/v1beta1
+      kind: VPC
+      metadata: {} # PATCHED
       spec:
-        forProvider:
-          databaseVersion: POSTGRES_12
-          region: us-central1
-          settings:
-            tier: db-custom-1-3840
-            dataDiskType: PD_SSD
-            ipConfiguration:
-              ipv4Enabled: true
-              authorizedNetworks:
-                - value: "0.0.0.0/0"
+        forProvider: {} # PATCHED
+          # cidrBlock: 10.0.0.0/16
+          # region: us-east-1 
     patches:
     - type: FromCompositeFieldPath
-      fromFieldPath: spec.parameters.storageGB
-      toFieldPath: spec.forProvider.settings.dataDiskSizeGb
+      fromFieldPath: spec.forProvider.region
+      toFieldPath: spec.forProvider.region
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.forProvider.cidrBlock
+      toFieldPath: spec.forProvider.cidrBlock
+    - type: FromCompositeFieldPath
+      fromFieldPath: metadata.name
+      toFieldPath: metadata.name
