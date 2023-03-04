@@ -1,14 +1,14 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
-  name: xrds.vpcs.ec2.aws.mfdev.com
+  name: xvpcs.ec2.aws.mfdev.com
 spec:
   group: ec2.aws.mfdev.com
   names:
     kind: XVPC
     plural: xvpcs
   claimNames:
-    kind: vpc
+    kind: VPC
     plural: vpcs
   versions:
   - name: v1alpha1

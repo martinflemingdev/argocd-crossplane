@@ -7,7 +7,7 @@ metadata:
 spec:
   writeConnectionSecretsToNamespace: crossplane-system
   compositeTypeRef:
-    apiVersion: xrds.vpcs.ec2.aws.mfdev.com/v1alpha1
+    apiVersion: ec2.aws.mfdev.com/v1alpha1
     kind: XVPC
   resources:
   - name: vpc
